@@ -2,7 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Gris un poco más oscuro para los puntos */
+  --dot-color: #cdb5e1;
+}
+
 body {
-  @apply bg-slate-50 text-slate-900;
-  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  /* Fondo estilo espacio profundo */
+  background: radial-gradient(circle at top right, #1e1b4b, #0f172a, #020617);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: white;
+}
+
+/* Opcional: añade esto para crear "estrellas" sutiles con el patrón de puntos */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(white 0.5px, transparent 0.5px);
+  background-size: 50px 50px;
+  opacity: 0.15;
+  pointer-events: none;
 }
