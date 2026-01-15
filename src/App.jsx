@@ -208,7 +208,7 @@ function App() {
               <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4">
                 <Globe className="text-slate-400" />
               </div>
-              <h3 className="text-xl font-bold text-slate-800 mb-2">Mi proyecto</h3>
+              <h3 className="text-xl font-bold text-slate-800 mb-2">Tu negocio</h3>
               <p className="text-slate-500 max-w-xs">
                 ¿Listo para digitalizar tu negocio con la máxima eficiencia?
               </p>
