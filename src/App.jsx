@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Globe, Zap, Search, BookOpen, ChevronDown, MessageCircle } from "lucide-react";
 import { useState } from "react";
 
@@ -60,16 +60,22 @@ function Glosario() {
                   className={`text-slate-400 transition-transform ${abierto === index ? 'rotate-180' : ''}`} 
                 />
               </button>
-              
-              {abierto === index && (
-                <motion.div 
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  className="px-6 pb-6 text-white leading-relaxed"
-                >
-                  {item.definicion}
-                </motion.div>
-              )}
+
+              <AnimatePresence>
+                {abierto === index && (
+                  <motion.div 
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 pb-6 text-slate-400 leading-relaxed border-t border-white/5 pt-4">
+                    {item.definicion}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ))}
         </div>
@@ -79,11 +85,19 @@ function Glosario() {
 }
 
 function App() {
+  const [copiado, setCopiado] = useState(false);
+
+  const manejarCopiado = () => {
+    navigator.clipboard.writeText("agvergarasoftware@gmail.com");
+    setCopiado(true);
+    setTimeout(() => setCopiado(false), 3000);
+  };
+
   return (
     <div className="min-h-screen font-sans selection:bg-indigo-500/3 text-slate-200">
       <Reveal>
         {/* Hero section */}
-        <section className="relative px-6 pt-20 pb-24 md:pt-32 lg:px-8 max-w-7xl mx-auto">
+        <section className="relative px-6 pt-20 pb-24 md:pt-32 lg:px-8 max-w-7xl mx-auto interface-object">
           <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0}}
@@ -95,24 +109,35 @@ function App() {
             </span>
 
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-8">
-              Tu oficio merece una <br />
+              Tu oficio merece verse tan <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">
-                vitrina digital imparable
+                profesional como tu trabajo
               </span>
             </h1>
 
             <p className="max-w-2xl mx-auto text-lg mg:text-xl text-slate-400 mb-10 leading-relaxed">
-              No solo creo páginas web. Construyo herramientas que cargan al instante, dominan los buscadores y convierten visitantes en clientes para tu negocio.
+              Creo sitios web rápidos, claros y optimizados para que te encuentren en Google y te contacten sin vueltas.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button className="px-8 py-4 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-500 transition-all flex items-center gap-2 group shadow-[0_0_20px_rgba(79,70,229,0.4)]">
-                Ver proyectos
-                <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className="px-8 py-4 bg-white/5 text-white border border-white/20 backdrop-blur-sm rounded-xl font-bold hover:bg-white/10 hover:border-white/40 transition-all">
-                Cotizar mi sitio
-              </button>
+              <a href="#proyectos">
+                <button className="px-8 py-4 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-500 transition-all flex items-center gap-2 group shadow-[0_0_20px_rgba(79,70,229,0.4)]">
+                  Ver proyectos
+                  <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+                </button>
+              </a>
+              <a
+                href="https://wa.me/56961917708?text=Hola%20Alejandro%21%20Me%20gustar%C3%ADa%20cotizar%20un%20proyecto%20contigo.%20Mi%20nombre%20es%3A"
+                target="_blank"
+                rel="noreferrer"
+              >
+
+                <button className="px-8 py-4 bg-white/5 text-white border border-white/20 backdrop-blur-sm rounded-xl font-bold hover:bg-white/10 hover:border-white/40 transition-all">
+
+                  Cotizar mi sitio
+
+                </button>
+              </a>
             </div>
           </motion.div>
         </section>
@@ -121,7 +146,7 @@ function App() {
 
       {/* Benefits Sections */}
       <Reveal>
-        <section className="py-20 bg-transparent">
+        <section className="py-20 bg-transparent interface-object">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               {/* Tarjeta 1: SEO */}
@@ -173,7 +198,7 @@ function App() {
 
       {/* Sección de proyectos */}
       <Reveal>
-        <section className="py-24 bg-transparent">
+        <section id="proyectos" className="py-24 bg-transparent interface-object">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="mb-16">
               <h2 className="text-3xl font-bold text-white mb-4">Proyectos Destacados</h2>
@@ -239,7 +264,7 @@ function App() {
 
       {/* Metodología de trabajo */}
       <Reveal>
-        <section className="py-24 bg-transparent">
+        <section className="py-24 bg-transparent interface-object">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold text-white mb-4">¿Cómo trabajaremos juntos?</h2>
@@ -251,7 +276,7 @@ function App() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
               {/* Paso 1 */}
               <div className="relative p-8 bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl z-10">
-                <div className="text-indigo-600 font-bold text-5xl mb-6 opacity-20">01</div>
+                <div className="text-white font-bold text-5xl mb-6 opacity-20">01</div>
                 <h3 className="text-xl font-bold mb-3">La Idea Base</h3>
                 <p className="text-slate-400">
                   Tú me entregas tu visión, tus deseos y los objetivos de tu negocio. Escucho cada detalle para entender qué es lo que realmente necesitas destacar.
@@ -269,7 +294,7 @@ function App() {
 
               {/* Paso 3 */}
               <div className="relative p-8 bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl z-10">
-                <div className="text-indigo-600 font-bold text-5xl mb-6 opacity-20">03</div>
+                <div className="text-white font-bold text-5xl mb-6 opacity-20">03</div>
                 <h3 className="text-xl font-bold mb-3">Ajuste Infinito</h3>
                 <p className="text-slate-400">
                   Gracias a mi flujo de trabajo con Git, podemos volver atrás, cambiar detalles o pivotar la idea hasta que el producto sea perfecto para ti.
@@ -284,7 +309,7 @@ function App() {
       {Glosario()}
 
       {/*Contacto / CTA Final */}
-      <section className="py-24 px-6 bg-transparent">
+      <section id="contacto" className="py-24 px-6 bg-transparent interface-object">
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -299,26 +324,68 @@ function App() {
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">
               ¿Listo para darle a tu oficio <br /> 
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">
-                la vitrina que merece?
+                el sitio que merece?
               </span>
             </h2>
             <p className="text-slate-400 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
               Hablemos de tu idea. Te ayudaré a aterrizarla y a convertirla en una herramienta real de crecimiento para tu negocio.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="mailto:tuemail@ejemplo.com" 
-                className="px-8 py-4 bg-white text-indigo-600 rounded-2xl font-bold hover:bg-indigo-500 hover:text-white transition-all shadow-[0_0_20px_rgba(79,70,229,0.4)] hover:scale-105 active:scale-95"
+              <button
+                onClick={manejarCopiado}
+                className="relative p-[2px] overflow-hidden rounded-2xl group transition-all active:scale-95"
               >
-                Enviar un correo
-              </a>
+                {/* Borde giratorio */}
+                <div className={`absolute inset-[-1000%] ${copiado ? 'animate-border-spin-fast' : 'animate-border-spin'} bg-[conic-gradient(from_90deg_at_50%_50%,#4338ca_0%,#818cf8_50%,#4338ca_100%)] ${copiado ? 'opacity-100' : 'opacity-40 group-hover:opacity-100'} transition-opacity`} />
+
+                {/* Cuerpo del botón */}
+                <div className={`relative px-8 py-4 ${copiado ? 'bg-indigo-600' : 'bg-slate-900'} rounded-[14px] transition-colors duration-500 flex items-center justify-center min-w-[200px]`}
+                >
+                  {/* Efecto de rellenado */}
+                  <motion.div
+                    initial={{ x: '-100%' }}
+                    animate={{ x: copiado ? '0%' : '-100%' }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    className="absolute inset-0 bg-white/10"
+                  />
+
+                  <span className="relative z-10 font-bold text-white flex items-center gap-2">
+                    {copiado ? (
+                      <>
+                        <motion.svg 
+                          viewBox="0 0 24 24" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="4" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round"
+                          className="w-5 h-5 text-emerald-300"
+                          initial={{ pathLength: 0, opacity: 0 }}
+                          animate={{ pathLength: 1, opacity: 1 }}
+                          transition={{ duration: 0.3, ease: "easeOut" }}
+                        >
+                          <polyline points="20 6 9 17 4 12" />
+                        </motion.svg>
+                        <motion.span
+                          initial={{ opacity: 0, x: 5 }}
+                          animate={{ opacity: 1, x: 0 }}
+                        >
+                          ¡Email Copiado!
+                        </motion.span>
+                      </>
+                    ) : (
+                      "Copiar mi correo"
+                    )}
+                  </span>
+                </div>
+              </button>
               <a 
-                href="https://wa.me/+56961917708" 
+                href="https://wa.me/56961917708?text=Hola%20Alejandro%21%20Vi%20tu%20portafolio%20digital%20y%20me%20gustar%C3%ADa%20consultar%20por%20un%20proyecto%20web%20para%20mi%20negocio.%20Mi%20nombre%20es%3A" 
                 target="_blank" 
                 className="px-8 py-4 bg-white/5 text-white border border-white/10 rounded-2xl font-bold hover:bg-white/10 transition-all backdrop-blur-md flex"
               >
                 <MessageCircle size={20} className="text-emerald-400 group-hover:scale-110 transition-transform"/>
-                <p className="pl-2">Escribir por <span className="text-emerald-400">Whatsapp</span></p>
+                <p className="pl-2">Agendar por <span className="text-emerald-400">Whatsapp</span></p>
               </a>
             </div>
           </div>
@@ -326,7 +393,7 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-white/5 bg-transparent relative overflow-hidden">
+      <footer className="py-12 border-t border-white/5 bg-transparent relative overflow-hidden interface-object">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
           <div className="flex flex-col items-center md:items-start">
