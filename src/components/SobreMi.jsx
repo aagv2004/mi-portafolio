@@ -1,0 +1,185 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaNodeJs, FaDocker, FaGithub, FaReact } from "react-icons/fa";
+import {
+  SiPhp,
+  SiPython,
+  SiMongodb,
+  SiMysql,
+  SiJavascript,
+  SiTailwindcss,
+} from "react-icons/si";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+// Aquí definimos tus "ventanitas" con sus colores originales de marca
+const tecnologias = [
+  { nombre: "JavaScript", Icono: SiJavascript, color: "text-[#F7DF1E]" },
+  { nombre: "React.js", Icono: FaReact, color: "text-[#61DAFB]" },
+  { nombre: "Node.js", Icono: FaNodeJs, color: "text-[#339933]" },
+  { nombre: "PHP", Icono: SiPhp, color: "text-[#777BB4]" },
+  { nombre: "Python", Icono: SiPython, color: "text-[#3776AB]" },
+  { nombre: "MySQL", Icono: SiMysql, color: "text-[#4479A1]" },
+  { nombre: "MongoDB", Icono: SiMongodb, color: "text-[#47A248]" },
+  { nombre: "Docker", Icono: FaDocker, color: "text-[#2496ED]" },
+  { nombre: "GitHub", Icono: FaGithub, color: "text-white" },
+  { nombre: "Tailwind CSS", Icono: SiTailwindcss, color: "text-[#06B6D4]" },
+];
+
+export const SobreMi = () => {
+  // Lógica del Slider
+  const [paginaActual, setPaginaActual] = useState(0);
+  const itemsPorPagina = 9; // Grilla de 3 columnas x 2 filas
+  const totalPaginas = Math.ceil(tecnologias.length / itemsPorPagina);
+
+  // Cortamos el arreglo para mostrar solo los de la página actual
+  const tecnologiasVisibles = tecnologias.slice(
+    paginaActual * itemsPorPagina,
+    (paginaActual + 1) * itemsPorPagina,
+  );
+
+  const irSiguiente = () => {
+    if (paginaActual < totalPaginas - 1) setPaginaActual(paginaActual + 1);
+  };
+
+  const irAnterior = () => {
+    if (paginaActual > 0) setPaginaActual(paginaActual - 1);
+  };
+
+  return (
+    <section
+      id="sobre-mi"
+      className="py-24 bg-transparent interface-object overflow-hidden"
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        {/* La estructura principal de 2 columnas */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          {/* COLUMNA IZQUIERDA: Tu perfil y texto */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              El perfil detrás del código
+            </h2>
+            <div className="space-y-6 text-slate-400 leading-relaxed text-lg text-justify md:text-left">
+              <p>
+                Soy{" "}
+                <strong className="text-indigo-400 font-semibold">
+                  Técnico Superior Analista Programador
+                </strong>{" "}
+                titulado y en marzo de 2026 daré el siguiente paso en mi
+                formación iniciando la Ingeniería en Desarrollo de Software.
+              </p>
+              <p>
+                Me destaco por mi adaptabilidad técnica: durante mi experiencia
+                profesional, fui capaz de transferir mis conocimientos teóricos
+                para estructurar y desarrollar un sistema a medida utilizando{" "}
+                <strong className="text-white font-semibold">
+                  PHP puro y MySQL
+                </strong>
+                , construyendo una arquitectura basada en los principios del MVC
+                desde cero.
+              </p>
+              <p>
+                Actualmente, mi enfoque es 100% práctico. Sigo expandiendo mi
+                ecosistema construyendo aplicaciones Full-Stack e integrando
+                APIs externas, sin dejar de lado la exploración en
+                infraestructura y automatización.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* COLUMNA DERECHA: La Vitrina / Slider */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex flex-col items-center lg:items-end w-full"
+          >
+            <div className="w-full max-w-[500px]">
+              {/* Contenedor del Slider (min-h fijo para que al cambiar de página no salte el contenido) */}
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 text-center">
+                Tecnologías & Herramientas
+              </h3>
+              <div className="relative p-1 rounded-2xl border border-white/5 bg-white/[0.2] backdrop-blur-sm">
+                <div className="w-full flex items-center justify-center overflow-hidden">
+                  {/* AnimatePresence permite animar la salida de un elemento y la entrada de otro */}
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={paginaActual}
+                      initial={{ opacity: 0, x: 0.95 }}
+                      animate={{ opacity: 1, x: 1 }}
+                      exit={{ opacity: 0, x: 0.95 }}
+                      transition={{ duration: 0.3 }}
+                      className="grid grid-cols-3 gap-4 md:gap-6 p-4 w-full"
+                    >
+                      {tecnologiasVisibles.map((tech, index) => (
+                        <div
+                          key={index}
+                          className="group relative flex flex-col items-center justify-center p-4 rounded-xl border border-white/5 bg-slate-900/40 hover:bg-slate-800/60 hover:border-indigo-500/50 transition-all duration-300"
+                        >
+                          <div className="absolute inset-0 bg-indigo-500/5 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity pointer-events-none" />
+                          <tech.Icono
+                            className={`text-4xl md:text-5xl mb-3 transition-transform duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] ${tech.color}`}
+                          />
+                          <span className="text-[10px] md:text-xs font-medium text-slate-400 group-hover:text-white transition-colors text-center uppercase tracking-wider">
+                            {tech.nombre}
+                          </span>
+                        </div>
+                      ))}
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* Controles del slider */}
+              <div className="flex items-center justify-center gap-4 mt-8">
+                <button
+                  onClick={irAnterior}
+                  disabled={paginaActual === 0}
+                  className={`p-1.5 rounded-full transition-all ${
+                    paginaActual === 0
+                      ? "text-slate-700 cursor-not-allowed" // Apagado si estás en la primera página
+                      : "text-slate-400 hover:text-white hover:bg-slate-800"
+                  }`}
+                >
+                  <ChevronLeft size={24} />
+                </button>
+
+                <div className="flex gap-3 px-2">
+                  {Array.from({ length: totalPaginas }).map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setPaginaActual(idx)}
+                      className={`transition-all duration-300 rounded-full h-2.5 ${
+                        paginaActual === idx
+                          ? "w-8 bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,0.5)]"
+                          : "w-2.5 bg-slate-600 hover:bg-slate-500"
+                      }`}
+                      aria-label={`Ir a la página ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+
+                <button
+                  onClick={irSiguiente}
+                  disabled={paginaActual === totalPaginas - 1}
+                  className={`p-1.5 rounded-full transition-all ${
+                    paginaActual === totalPaginas - 1
+                      ? "text-slate-700 cursor-not-allowed" // Apagado si estás en la última página
+                      : "text-slate-400 hover:text-white hover:bg-slate-800"
+                  }`}
+                >
+                  <ChevronRight size={24} />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
