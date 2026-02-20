@@ -22,7 +22,7 @@ const proyectos = [
     ],
     github: "https://github.com/aagv2004/Watchlist-os",
     demo: "https://watchlist-os.vercel.app/",
-    imagen: "bg-gradient-to-br from-slate-800 to-slate-900",
+    imagen: "/watchlist-os.png",
   },
   {
     id: 2,
@@ -35,7 +35,7 @@ const proyectos = [
     tecnologias: ["Node.js", "Express", "MySQL", "React", "Tailwind CSS"],
     github: "https://github.com/aagv2004/Phoenix-ERP",
     demo: null,
-    imagen: "bg-gradient-to-br from-slate-800 to-slate-900",
+    imagen: "/phoenix-erp.png",
   },
   {
     id: 3,
@@ -48,7 +48,7 @@ const proyectos = [
     tecnologias: ["React", "Node.js", "MongoDB"],
     github: "https://github.com/aagv2004/EcoTracker-fullstack",
     demo: "https://eco-managing-front.vercel.app/",
-    imagen: "bg-gradient-to-br from-slate-800 to-slate-900",
+    imagen: "/ecotracker.png",
   },
 ];
 
@@ -78,13 +78,22 @@ export const Proyectos = () => {
               transition={{ duration: 0.5, delay: index * 0.15 }}
               className="group flex flex-col bg-slate-900/40 backdrop-blur-sm border border-white/10 rounded-3xl overflow-hidden hover:-translate-y-2 hover:border-indigo-500/50 transition-all duration-300 shadow-xl h-full"
             >
-              {/* Parte superior: Una imagen o bloque de color */}
-              <div
-                className={`h-48 w-full ${proyecto.imagen} relative overflow-hidden flex items-center justify-center border-b border-white/5`}
-              >
-                <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-transparent transition-colors duration-500" />
-                {/* acá puedo poner la foto */}
-                <div className="p-4 bg-slate-900/80 rounded-2xl shadow-2xl backdrop-blur-md border border-white/10 group-hover:scale-110 transition-transform duration-500">
+              {/* Parte Superior: Imagen o Bloque de Color */}
+              <div className="h-48 w-full relative overflow-hidden flex items-center justify-center border-b border-white/5 bg-slate-900">
+                {/* Lógica: Si el texto empieza con 'bg-', pinta un gradiente. Si no, renderiza la imagen */}
+                {proyecto.imagen.startsWith("bg-") ? (
+                  <div className={`absolute inset-0 ${proyecto.imagen}`} />
+                ) : (
+                  <img
+                    src={proyecto.imagen}
+                    alt={`Vista previa de ${proyecto.titulo}`}
+                    className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500"
+                  />
+                )}
+
+                <div className="absolute inset-0 bg-slate-950/30 group-hover:bg-transparent transition-colors duration-500" />
+
+                <div className="p-4 bg-slate-900/80 rounded-2xl shadow-2xl backdrop-blur-md border border-white/10 group-hover:scale-110 transition-transform duration-500 z-10">
                   {proyecto.icono}
                 </div>
               </div>
