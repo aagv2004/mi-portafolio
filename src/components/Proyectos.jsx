@@ -32,7 +32,14 @@ const proyectos = [
     icono: <Database className="text-amber-400" size={24} />,
     descripcion:
       "Sistema de planificación de recursos empresariales enfocado en gestión centralizada de inventarios. Diseño de base de datos relacional robusta y operaciones CRUD complejas para sincronización multi-sucursal.",
-    tecnologias: ["Node.js", "Express", "MySQL", "React", "Tailwind CSS"],
+    tecnologias: [
+      "Node.js",
+      "Express",
+      "MySQL",
+      "Docker",
+      "React",
+      "Tailwind CSS",
+    ],
     github: "https://github.com/aagv2004/Phoenix-ERP",
     demo: null,
     imagen: "/phoenix-erp.png",

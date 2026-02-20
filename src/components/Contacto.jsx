@@ -38,14 +38,18 @@ export const Contacto = () => {
             arquitectura desafiante o hablar sobre código, mi bandeja de entrada
             está abierta.
           </p>
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {/* Botón de Copiar Correo Reparado */}
             <button
               onClick={manejarCopiado}
               className="relative p-[2px] overflow-hidden rounded-2xl group transition-all active:scale-95"
             >
+              {/* Aquí estaba el error: 90deg y #4338ca */}
               <div
-                className={`absolute inset-[-1000%] ${copiado ? "animate-border-spin-fast" : "animate-border-spin"} bg-[conic-gradient(from_90def_at_50%_50%,#433ca_0%,#818cf8_50%,#433ca_100%)] ${copiado ? "opacity-100" : "opacity-40 group-hover:opacity-100"} transition-opacity`}
+                className={`absolute inset-[-1000%] ${copiado ? "animate-[spin_1s_linear_infinite]" : "animate-[spin_4s_linear_infinite]"} bg-[conic-gradient(from_90deg_at_50%_50%,#4338ca_0%,#818cf8_50%,#4338ca_100%)] ${copiado ? "opacity-100" : "opacity-40 group-hover:opacity-100"} transition-opacity`}
               />
+
               <div
                 className={`relative px-8 py-4 ${copiado ? "bg-indigo-600" : "bg-slate-900"} rounded-[14px] transition-colors duration-500 flex items-center justify-center min-w-[200px]`}
               >
@@ -85,8 +89,8 @@ export const Contacto = () => {
                 </span>
               </div>
             </button>
+
             <a
-              // Link de WhatsApp actualizado a un tono profesional IT
               href="https://wa.me/56961917708?text=Hola%20Alejandro%21%20He%20visto%20tu%20portafolio%20y%20me%20gustaría%20conversar%20contigo%20sobre%20una%20oportunidad.%20Mi%20nombre%20es%3A"
               target="_blank"
               rel="noreferrer"
