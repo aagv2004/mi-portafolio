@@ -46,7 +46,7 @@ export const Glosario = () => {
             >
               <button
                 onClick={() => setAbierto(abierto === index ? null : index)}
-                className="w-full flex items-center justify-between px-8 py-6 mb-2 text-left hover:bg-violet-600/20 transition-colors"
+                className="w-full flex items-center justify-between px-8 py-6 text-left hover:bg-violet-600/20 transition-colors"
               >
                 <span className="font-bold text-white text-lg">
                   {item.titulo}
@@ -68,7 +68,7 @@ export const Glosario = () => {
                     }}
                     className="overflow-hidden"
                   >
-                    <div className="px-8 pb-6 text-slate-400 leading-relaxed border-t border-white/5 pt-6 mb-2">
+                    <div className="px-8 pb-6 text-slate-400 leading-relaxed border-t border-white/5 pt-6">
                       {item.definicion}
                     </div>
                   </motion.div>
