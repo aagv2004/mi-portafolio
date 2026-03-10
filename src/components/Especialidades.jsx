@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Server, Layout, Database } from "lucide-react";
-import { FaNodeJs, FaDocker, FaGithub, FaReact } from "react-icons/fa";
+import { FaNodeJs, FaGithub, FaReact } from "react-icons/fa";
 import {
   SiPhp,
   SiPython,
@@ -8,10 +8,15 @@ import {
   SiMysql,
   SiJavascript,
   SiTailwindcss,
-  SiFramer,
+  SiHtml5,
   SiDjango,
-  SiUbuntu,
+  SiPostgresql,
+  SiOracle,
+  SiGit,
+  SiCss3,
+  SiBootstrap,
 } from "react-icons/si";
+import { Firebase } from "@boxicons/react";
 
 const areas = [
   {
@@ -32,7 +37,7 @@ const areas = [
   },
   {
     id: "frontend",
-    titulo: "Maletín Frontend",
+    titulo: "Interfaces & Frontend",
     icono: <Layout className="text-violet-400" size={28} />,
     colorGlow: "bg-violet-600/20",
     colorBorder: "border-violet-500/30",
@@ -43,7 +48,9 @@ const areas = [
       { nombre: "JavaScript", Icono: SiJavascript, color: "text-[#F7DF1E]" },
       { nombre: "React.js", Icono: FaReact, color: "text-[#61DAFB]" },
       { nombre: "Tailwind", Icono: SiTailwindcss, color: "text-[#06B6D4]" },
-      { nombre: "Framer", Icono: SiFramer, color: "text-[#0055FF]" },
+      { nombre: "HTML5", Icono: SiHtml5, color: "text-[#E34C26]" },
+      { nombre: "CSS3", Icono: SiCss3, color: "text-[#1572B6]" },
+      { nombre: "Bootstrap", Icono: SiBootstrap, color: "text-[#7952B3]" },
     ],
   },
   {
@@ -58,9 +65,11 @@ const areas = [
     tecnologias: [
       { nombre: "MySQL", Icono: SiMysql, color: "text-[#4479A1]" },
       { nombre: "MongoDB", Icono: SiMongodb, color: "text-[#47A248]" },
-      { nombre: "Docker", Icono: FaDocker, color: "text-[#2496ED]" },
-      { nombre: "Ubuntu", Icono: SiUbuntu, color: "text-[#E95420]" },
-      { nombre: "Git", Icono: FaGithub, color: "text-white" },
+      { nombre: "GitHub", Icono: FaGithub, color: "text-white" },
+      { nombre: "PostgreSQL", Icono: SiPostgresql, color: "text-[#4479A1]" },
+      { nombre: "Oracle SQL", Icono: SiOracle, color: "text-[#F80102]" },
+      { nombre: "Git", Icono: SiGit, color: "text-[#F1502F]" },
+      { nombre: "Firebase", Icono: Firebase, color: "text-[#FFCA28]" },
     ],
   },
 ];

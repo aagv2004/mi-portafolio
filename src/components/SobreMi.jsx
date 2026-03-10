@@ -8,7 +8,17 @@ import {
   SiMysql,
   SiJavascript,
   SiTailwindcss,
+  SiPostgresql,
+  SiOracle,
+  SiGit,
+  SiUbuntu,
+  SiBootstrap,
+  SiHtml5,
+  SiCss3,
+  SiElectron,
+  SiFlutter,
 } from "react-icons/si";
+import { Firebase } from "@boxicons/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // Aquí definimos tus "ventanitas" con sus colores originales de marca
@@ -23,6 +33,18 @@ const tecnologias = [
   { nombre: "Docker", Icono: FaDocker, color: "text-[#2496ED]" },
   { nombre: "GitHub", Icono: FaGithub, color: "text-white" },
   { nombre: "Tailwind CSS", Icono: SiTailwindcss, color: "text-[#06B6D4]" },
+  { nombre: "PostgreSQL", Icono: SiPostgresql, color: "text-[#4479A1]" },
+  { nombre: "Ubuntu", Icono: SiUbuntu, color: "text-[#E95420]" },
+  { nombre: "Oracle SQL", Icono: SiOracle, color: "text-[#F80102]" },
+  { nombre: "Git", Icono: SiGit, color: "text-[#F1502F]" },
+  { nombre: "Firebase", Icono: Firebase, color: "text-[#FFCA28]" },
+  { nombre: "Bootstrap", Icono: SiBootstrap, color: "text-[#7952B3]" },
+  { nombre: "Html5", Icono: SiHtml5, color: "text-[#E34C26]" },
+  { nombre: "CSS3", Icono: SiCss3, color: "text-[#1572B6]" },
+  { nombre: "Electron", Icono: SiElectron, color: "text-[#47848F]" },
+  { nombre: "PyQt", Icono: SiPython, color: "text-[#3776AB]" },
+  { nombre: "Tkinter", Icono: SiPython, color: "text-[#3776AB]" },
+  { nombre: "Flutter", Icono: SiFlutter, color: "text-[#02569B]" },
 ];
 
 export const SobreMi = () => {
@@ -102,7 +124,7 @@ export const SobreMi = () => {
             <div className="w-full max-w-[500px]">
               {/* Contenedor del Slider (min-h fijo para que al cambiar de página no salte el contenido) */}
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 text-center">
-                Tecnologías & Herramientas
+                Herramientas Conocidas
               </h3>
               <div className="relative p-1 rounded-2xl border border-white/5 bg-white/[0.2] backdrop-blur-sm">
                 <div className="w-full flex items-center justify-center overflow-hidden">
