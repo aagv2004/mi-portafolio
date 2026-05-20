@@ -23,7 +23,7 @@ function App() {
       <header className="fixed top-0 left-0 w-full z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
         <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
           <a href="#" className="flex items-center gap-3">
-            <img src="/favicon.svg" alt="Logo" className="w-8 h-8" />
+            <img src="/vite.svg" alt="Logo" className="w-8 h-8" />
             <span className="font-bold text-white tracking-wide">AGV</span>
           </a>
 
