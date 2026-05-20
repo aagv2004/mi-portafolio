@@ -24,7 +24,7 @@ function App() {
         <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
           <a href="#" className="flex items-center gap-3">
             <img src="/vite.svg" alt="Logo" className="w-8 h-8" />
-            <span className="font-bold text-white tracking-wide">AGV</span>
+            <span className="font-bold text-white tracking-wide">Alejandro G. Vergara</span>
           </a>
 
           <div className="hidden md:flex items-center gap-8 text-sm text-slate-300">
