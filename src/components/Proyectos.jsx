@@ -84,10 +84,10 @@ export const Proyectos = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="group flex flex-col bg-slate-900/40 backdrop-blur-sm border border-white/10 rounded-3xl overflow-hidden hover:-translate-y-2 hover:border-indigo-500/50 transition-all duration-300 shadow-xl h-full"
+              className="project-card group flex flex-col bg-slate-900/40 backdrop-blur-sm border border-white/10 rounded-3xl overflow-hidden hover:-translate-y-2 hover:border-indigo-500/50 transition-all duration-300 shadow-xl h-full"
             >
               {/* Parte Superior: Imagen o Bloque de Color */}
-              <div className="h-48 w-full relative overflow-hidden flex items-center justify-center border-b border-white/5 bg-slate-900">
+              <div className="project-media h-48 w-full relative overflow-hidden flex items-center justify-center border-b border-white/5 bg-slate-900">
                 {/* Lógica: Si el texto empieza con 'bg-', pinta un gradiente. Si no, renderiza la imagen */}
                 {proyecto.imagen.startsWith("bg-") ? (
                   <div className={`absolute inset-0 ${proyecto.imagen}`} />
@@ -130,7 +130,7 @@ export const Proyectos = () => {
                   {proyecto.tecnologias.map((tech, i) => (
                     <span
                       key={i}
-                      className="text-xs font-medium text-slate-300 bg-slate-800 px-2.5 py-1 rounded-md border border-slate-700"
+                      className="tech-pill text-xs font-medium text-slate-300 bg-slate-800 px-2.5 py-1 rounded-md border border-slate-700"
                     >
                       {tech}
                     </span>

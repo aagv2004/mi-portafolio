@@ -6,6 +6,8 @@ import {
   SiMysql,
   SiJavascript,
   SiOracle,
+  SiPostman,
+  SiFirebase,
   SiTailwindcss,
   SiSpringboot,
 } from "react-icons/si";
@@ -48,11 +50,13 @@ const areas = [
     colorBorder: "border-emerald-500/30",
     alineacion: "md:mr-0 md:ml-auto",
     descripcion:
-      "Trabajo con bases de datos relacionales y no relacionales. Manejo la base sintáctica de SQL, modelo consultas y adapto la solución según el motor que requiera el proyecto.",
+      "Trabajo con bases de datos relacionales y no relacionales, servicios como Firebase y herramientas de prueba de APIs. Modelo consultas, valido endpoints y adapto la solución según el entorno que requiera el proyecto.",
     tecnologias: [
       { nombre: "Oracle Database", Icono: SiOracle, color: "text-[#F80102]" },
       { nombre: "MySQL", Icono: SiMysql, color: "text-[#4479A1]" },
       { nombre: "MongoDB", Icono: SiMongodb, color: "text-[#47A248]" },
+      { nombre: "Firebase", Icono: SiFirebase, color: "text-[#FFCA28]" },
+      { nombre: "Postman", Icono: SiPostman, color: "text-[#FF6C37]" },
     ],
   },
 ];
@@ -82,7 +86,7 @@ export const Especialidades = () => {
               className={`w-full md:w-[85%] ${area.alineacion}`}
             >
               <div
-                className={`relative overflow-hidden flex flex-col lg:flex-row bg-slate-950/80 backdrop-blur-2xl border border-slate-800 rounded-[2.5rem] shadow-[0_-10px_40px_rgba(0,0,0,0.5)] transition-all duration-500 hover:${area.colorBorder}`}
+                className={`specialty-card relative overflow-hidden flex flex-col lg:flex-row bg-slate-950/80 backdrop-blur-2xl border border-slate-800 rounded-[2.5rem] shadow-[0_-10px_40px_rgba(0,0,0,0.5)] transition-all duration-500 hover:${area.colorBorder}`}
               >
                 <div
                   className={`absolute -top-32 -left-32 w-64 h-64 rounded-full blur-[100px] ${area.colorGlow} pointer-events-none opacity-50`}
@@ -107,7 +111,7 @@ export const Especialidades = () => {
                     {area.tecnologias.map((tech) => (
                       <div
                         key={tech.nombre}
-                        className="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-800/40 border border-slate-700/50 hover:bg-slate-800 hover:-translate-y-2 transition-all duration-300 shadow-lg group"
+                        className="tech-card flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-800/40 border border-slate-700/50 hover:bg-slate-800 hover:-translate-y-2 transition-all duration-300 shadow-lg group"
                       >
                         <tech.Icono
                           className={`text-4xl mb-3 transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-lg ${tech.color}`}

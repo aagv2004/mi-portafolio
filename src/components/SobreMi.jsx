@@ -137,36 +137,44 @@ export const SobreMi = () => {
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 text-center">
                 Herramientas Conocidas
               </h3>
-              <div className="relative p-1 rounded-2xl border border-white/5 bg-white/[0.2] backdrop-blur-sm">
-                <div className="w-full flex items-center justify-center overflow-hidden">
+              <motion.div
+                layout
+                transition={{ layout: { duration: 0.45, ease: "easeInOut" } }}
+                className="known-tools-panel relative p-1 rounded-2xl border border-white/5 bg-white/[0.2] backdrop-blur-sm"
+              >
+                <motion.div
+                  layout
+                  className="w-full flex items-center justify-center overflow-hidden"
+                >
                   {/* AnimatePresence permite animar la salida de un elemento y la entrada de otro */}
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={paginaActual}
-                      initial={{ opacity: 0, x: 0.95 }}
-                      animate={{ opacity: 1, x: 1 }}
-                      exit={{ opacity: 0, x: 0.95 }}
-                      transition={{ duration: 0.3 }}
-                      className="grid grid-cols-3 gap-4 md:gap-6 p-4 w-full"
+                      layout
+                      initial={{ opacity: 0, scale: 0.98, y: 8 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.98, y: -8 }}
+                      transition={{ duration: 0.28, ease: "easeOut" }}
+                      className="grid min-h-[356px] grid-cols-3 content-start gap-4 p-4 w-full md:min-h-[408px] md:gap-6"
                     >
                       {tecnologiasVisibles.map((tech, index) => (
                         <div
                           key={index}
-                          className="group relative flex flex-col items-center justify-center p-4 rounded-xl border border-white/5 bg-slate-900/40 hover:bg-slate-800/60 hover:border-indigo-500/50 transition-all duration-300"
+                          className="known-tool-card group relative flex flex-col items-center justify-center p-4 rounded-xl border border-white/5 bg-slate-900/40 hover:bg-slate-800/60 hover:border-indigo-500/50 transition-all duration-300"
                         >
                           <div className="absolute inset-0 bg-indigo-500/5 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity pointer-events-none" />
                           <tech.Icono
                             className={`text-4xl md:text-5xl mb-3 transition-transform duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] ${tech.color}`}
                           />
-                          <span className="text-[10px] md:text-xs font-medium text-slate-400 group-hover:text-white transition-colors text-center uppercase tracking-wider">
+                          <span className="known-tool-label text-[10px] md:text-xs font-medium text-slate-400 group-hover:text-white transition-colors text-center uppercase tracking-wider">
                             {tech.nombre}
                           </span>
                         </div>
                       ))}
                     </motion.div>
                   </AnimatePresence>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
 
               {/* Controles del slider */}
               <div className="flex items-center justify-center gap-4 mt-8">

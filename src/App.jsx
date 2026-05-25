@@ -1,18 +1,29 @@
-import { motion } from "framer-motion";
-import { ArrowRight, Moon, Sun } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight, Menu, Moon, Sun, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { AmbientNetwork } from "./components/AmbientNetwork.jsx";
 import Reveal from "./components/Reveal.jsx";
 import { SobreMi } from "./components/SobreMi.jsx";
+import { Curriculum } from "./components/Curriculum.jsx";
 import { Proyectos } from "./components/Proyectos.jsx";
 import { Especialidades } from "./components/Especialidades.jsx";
 import { Contacto } from "./components/Contacto.jsx";
 import { Footer } from "./components/Footer.jsx";
+
+const navItems = [
+  { href: "#sobre-mi", label: "Sobre mí" },
+  { href: "#cv", label: "CV" },
+  { href: "#especialidades", label: "Especialidades" },
+  { href: "#proyectos", label: "Proyectos" },
+  { href: "#contacto", label: "Contacto" },
+];
 
 function App() {
   const [tema, setTema] = useState(() => {
     if (typeof window === "undefined") return "dark";
     return localStorage.getItem("tema") || "dark";
   });
+  const [menuMovilAbierto, setMenuMovilAbierto] = useState(false);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -25,11 +36,17 @@ function App() {
     setTema((temaActual) => (temaActual === "dark" ? "light" : "dark"));
   };
 
+  const cerrarMenuMovil = () => {
+    setMenuMovilAbierto(false);
+  };
+
   return (
     <div className="min-h-screen font-sans selection:bg-indigo-500/30 text-slate-200">
-      <header className="fixed top-0 left-0 w-full z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
+      <AmbientNetwork />
+      <div className="relative z-10">
+        <header className="fixed top-0 left-0 w-full z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
         <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-3">
+          <a href="#" className="nav-brand flex items-center gap-3">
             <img src="/vite.svg" alt="Logo" className="w-8 h-8" />
             <span className="font-bold text-white tracking-wide">
               Alejandro G. Vergara
@@ -37,22 +54,12 @@ function App() {
           </a>
 
           <div className="flex items-center gap-4">
-            <div className="hidden md:flex items-center gap-8 text-sm text-slate-300">
-              <a href="#sobre-mi" className="hover:text-indigo-400 transition">
-                Sobre mí
-              </a>
-              <a
-                href="#especialidades"
-                className="hover:text-indigo-400 transition"
-              >
-                Especialidades
-              </a>
-              <a href="#proyectos" className="hover:text-indigo-400 transition">
-                Proyectos
-              </a>
-              <a href="#contacto" className="hover:text-indigo-400 transition">
-                Contacto
-              </a>
+            <div className="hidden md:flex items-center gap-2 text-sm text-slate-300">
+              {navItems.map((item) => (
+                <a key={item.href} href={item.href} className="nav-link">
+                  {item.label}
+                </a>
+              ))}
             </div>
 
             <button
@@ -66,11 +73,50 @@ function App() {
             >
               {tema === "dark" ? <Sun size={18} /> : <Moon size={18} />}
             </button>
+
+            <button
+              type="button"
+              onClick={() => setMenuMovilAbierto((abierto) => !abierto)}
+              className="mobile-menu-toggle inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-200 backdrop-blur-sm transition hover:border-indigo-400/50 hover:text-white md:hidden"
+              aria-label={
+                menuMovilAbierto ? "Cerrar menú móvil" : "Abrir menú móvil"
+              }
+              aria-controls="mobile-navigation"
+              aria-expanded={menuMovilAbierto}
+            >
+              {menuMovilAbierto ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
         </nav>
-      </header>
 
-      <Reveal>
+        <AnimatePresence>
+          {menuMovilAbierto && (
+            <motion.div
+              id="mobile-navigation"
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+              className="mobile-nav-panel md:hidden border-t border-white/10 bg-slate-950/90 px-6 py-4 shadow-2xl backdrop-blur-xl"
+            >
+              <div className="mx-auto flex max-w-7xl flex-col gap-2">
+                {navItems.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={cerrarMenuMovil}
+                    className="mobile-nav-link"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        </header>
+
+        <Reveal>
         {/* Hero section */}
         <section className="relative min-h-screen px-6 pt-32 pb-24 lg:px-8 max-w-7xl mx-auto grid lg:grid-cols-2 gap-14 items-center interface-object">
           <motion.div
@@ -137,27 +183,32 @@ function App() {
             </div>
           </motion.div>
         </section>
-      </Reveal>
+        </Reveal>
 
-      <Reveal>
-        <SobreMi />
-      </Reveal>
+        <Reveal>
+          <SobreMi />
+        </Reveal>
 
-      <Reveal>
-        <Especialidades />
-      </Reveal>
+        <Reveal>
+          <Curriculum />
+        </Reveal>
 
-      <Reveal>
-        <Proyectos />
-      </Reveal>
+        <Reveal>
+          <Especialidades />
+        </Reveal>
 
-      <Reveal>
-        <Contacto />
-      </Reveal>
+        <Reveal>
+          <Proyectos />
+        </Reveal>
 
-      <Reveal>
-        <Footer />
-      </Reveal>
+        <Reveal>
+          <Contacto />
+        </Reveal>
+
+        <Reveal>
+          <Footer />
+        </Reveal>
+      </div>
     </div>
   );
 }

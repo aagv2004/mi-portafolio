@@ -2,15 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* =========================================================
+   Variables globales
+   Aquí puedes centralizar tokens simples que se reutilicen
+   en todo el CSS global.
+   ========================================================= */
 :root {
-  /* Gris un poco más oscuro para los puntos */
+  /* Color base para patrones decorativos sutiles. */
   --dot-color: #cdb5e1;
 }
 
+/* =========================================================
+   Base del documento y tema oscuro
+   El portafolio parte en modo oscuro. Este bloque define el
+   fondo principal, el color de texto base y la transición entre
+   temas.
+   ========================================================= */
 body {
   margin: 0;
   padding: 0;
-  /* Fondo estilo espacio profundo */
   background: radial-gradient(circle at top right, #1e1b4b, #0f172a, #020617);
   background-attachment: fixed;
   min-height: 100vh;
@@ -20,33 +30,78 @@ body {
     color 300ms ease;
 }
 
-/* Opcional: añade esto para crear "estrellas" sutiles con el patrón de puntos */
+/* Capa de textura reservada.
+   El fondo vivo actual lo renderiza AmbientNetwork.jsx con canvas. */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(white 0.5px, transparent 0.5px);
-  background-size: 50px 50px;
-  opacity: 0.15;
+  opacity: 0;
   pointer-events: none;
   transition:
     opacity 300ms ease,
     background-image 300ms ease;
 }
 
+/* Luces suaves adicionales. En oscuro están apagadas y se activan en modo claro. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, rgba(99, 102, 241, 0.08), transparent 28rem),
+    linear-gradient(300deg, rgba(14, 165, 233, 0.08), transparent 24rem);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+/* =========================================================
+   Fondo del modo claro
+   Ajusta aquí la personalidad visual del modo claro: gradientes,
+   puntos decorativos y color de texto base.
+   ========================================================= */
 html.light body {
   background:
-    radial-gradient(circle at top right, rgba(99, 102, 241, 0.16), transparent 34rem),
-    radial-gradient(circle at bottom left, rgba(14, 165, 233, 0.12), transparent 30rem),
-    linear-gradient(135deg, #f8fafc 0%, #eef2ff 52%, #f8fafc 100%);
+    radial-gradient(circle at top right, rgba(79, 70, 229, 0.22), transparent 34rem),
+    radial-gradient(circle at 12% 82%, rgba(14, 165, 233, 0.16), transparent 30rem),
+    linear-gradient(135deg, #f8fafc 0%, #e0e7ff 48%, #f1f5f9 100%);
   color: #0f172a;
 }
 
-html.light body::before {
-  background-image: radial-gradient(#6366f1 0.5px, transparent 0.5px);
-  opacity: 0.1;
+/* Activa las luces suaves de body::after cuando el tema claro está activo. */
+html.light body::after {
+  opacity: 1;
 }
 
+/* El canvas toma los colores del tema, así que este pseudo queda apagado. */
+html.light body::before {
+  opacity: 0;
+}
+
+/* Canvas ambiental con nodos vivos y reacción sutil al cursor. */
+.ambient-network {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.62;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+html.light .ambient-network {
+  opacity: 0.46;
+  mix-blend-mode: multiply;
+}
+
+/* =========================================================
+   Adaptación global de texto para modo claro
+   Como muchos componentes usan utilidades Tailwind pensadas
+   para dark mode, estas reglas corrigen contraste sin reescribir
+   cada componente.
+   ========================================================= */
 html.light .text-white,
 html.light .text-slate-100,
 html.light .text-slate-200,
@@ -73,6 +128,12 @@ html.light .text-emerald-400 {
   color: #059669;
 }
 
+/* =========================================================
+   Adaptación global de fondos y bordes
+   Convierte superficies oscuras de Tailwind en paneles claros.
+   Si una tarjeta se ve demasiado plana o demasiado fuerte,
+   probablemente quieras empezar revisando estos valores.
+   ========================================================= */
 html.light [class*="bg-slate-950"],
 html.light [class*="bg-slate-900"],
 html.light [class*="bg-slate-800"] {
@@ -88,38 +149,232 @@ html.light [class*="border-slate-"] {
   border-color: rgba(99, 102, 241, 0.16);
 }
 
+/* Header fijo en modo claro: más contraste y sombra para separarlo del fondo. */
 html.light header {
-  background-color: rgba(255, 255, 255, 0.78);
-  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
+  background-color: rgba(248, 250, 252, 0.84);
+  box-shadow: 0 14px 44px rgba(15, 23, 42, 0.12);
 }
 
+/* =========================================================
+   Navegación
+   Estilos del menú superior en desktop y del panel móvil.
+   ========================================================= */
+.nav-brand span {
+  text-shadow: 0 0 22px rgba(129, 140, 248, 0.22);
+}
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.55rem 0.85rem;
+  color: #cbd5e1;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0.85rem;
+  right: 0.85rem;
+  bottom: 0.35rem;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #818cf8, #22d3ee);
+  opacity: 0;
+  transform: scaleX(0.6);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.nav-link:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  min-height: 3rem;
+  border-radius: 0.85rem;
+  padding: 0.8rem 1rem;
+  color: #e2e8f0;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.mobile-nav-link:hover {
+  background-color: rgba(99, 102, 241, 0.14);
+  color: #ffffff;
+  transform: translateX(3px);
+}
+
+html.light .nav-brand span {
+  color: #0f172a;
+  text-shadow: 0 10px 28px rgba(79, 70, 229, 0.18);
+}
+
+html.light .nav-link {
+  color: #334155;
+}
+
+html.light .nav-link:hover {
+  background-color: rgba(79, 70, 229, 0.08);
+  color: #312e81;
+}
+
+html.light .mobile-menu-toggle {
+  background-color: rgba(255, 255, 255, 0.86);
+  color: #0f172a;
+  border-color: rgba(79, 70, 229, 0.28);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+}
+
+html.light .mobile-nav-panel {
+  background-color: rgba(248, 250, 252, 0.94);
+  border-color: rgba(79, 70, 229, 0.16);
+}
+
+html.light .mobile-nav-link {
+  color: #1e293b;
+}
+
+html.light .mobile-nav-link:hover {
+  background-color: rgba(79, 70, 229, 0.1);
+  color: #312e81;
+}
+
+/* =========================================================
+   Superficies principales del modo claro
+   Cards grandes: hero, contacto, CV, proyectos y especialidades.
+   Aquí vive gran parte de la "profundidad" visual del modo claro.
+   ========================================================= */
 html.light .hero-code-card,
-html.light .contact-card {
-  background-color: rgba(255, 255, 255, 0.68);
-  box-shadow: 0 24px 70px rgba(79, 70, 229, 0.14);
+html.light .contact-card,
+html.light .cv-card,
+html.light .project-card,
+html.light .specialty-card {
+  background-color: rgba(255, 255, 255, 0.78);
+  border-color: rgba(79, 70, 229, 0.18);
+  box-shadow:
+    0 24px 70px rgba(79, 70, 229, 0.16),
+    0 8px 24px rgba(15, 23, 42, 0.08);
 }
 
-html.light .contact-info-panel {
-  background-color: rgba(255, 255, 255, 0.5);
+/* Estado hover de tarjetas interactivas en modo claro. */
+html.light .project-card:hover,
+html.light .specialty-card:hover {
+  border-color: rgba(79, 70, 229, 0.42);
+  box-shadow:
+    0 28px 80px rgba(79, 70, 229, 0.2),
+    0 10px 28px rgba(15, 23, 42, 0.1);
 }
 
+/* Subtarjetas internas: datos de contacto, detalles del CV y tecnologías. */
+html.light .contact-info-panel,
+html.light .cv-detail,
+html.light .tech-card,
+html.light .known-tool-card {
+  background-color: rgba(248, 250, 252, 0.82);
+  border-color: rgba(79, 70, 229, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+/* Vitrina de "Herramientas conocidas" en modo claro. */
+html.light .known-tools-panel {
+  background-color: rgba(255, 255, 255, 0.54);
+  border-color: rgba(79, 70, 229, 0.14);
+  box-shadow: 0 18px 46px rgba(79, 70, 229, 0.1);
+}
+
+html.light .known-tool-card:hover {
+  background-color: rgba(238, 242, 255, 0.95);
+  border-color: rgba(79, 70, 229, 0.36);
+}
+
+html.light .known-tool-card:hover .known-tool-label {
+  color: #1e293b;
+}
+
+/* Zona de imagen de proyectos en modo claro. */
+html.light .project-media {
+  background-color: #dbeafe;
+  border-color: rgba(79, 70, 229, 0.14);
+}
+
+/* Aumenta la visibilidad de previews en modo claro respecto del dark overlay. */
+html.light .project-media img {
+  opacity: 0.72;
+}
+
+/* Etiquetas de tecnologías dentro de cada proyecto. */
+html.light .tech-pill {
+  background-color: rgba(79, 70, 229, 0.08);
+  border-color: rgba(79, 70, 229, 0.18);
+  color: #334155;
+}
+
+/* =========================================================
+   Acciones y controles en modo claro
+   Botones principales, secundarios y toggle de tema. Mantener
+   estos estilos separados facilita ajustar llamadas a la acción.
+   ========================================================= */
 html.light .primary-action,
 html.light .primary-action * {
   color: white;
 }
 
 html.light .secondary-action {
-  background-color: rgba(255, 255, 255, 0.72);
+  background-color: rgba(255, 255, 255, 0.82);
   color: #0f172a;
-  border-color: rgba(99, 102, 241, 0.22);
+  border-color: rgba(79, 70, 229, 0.28);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
 }
 
 html.light .theme-toggle {
-  background-color: rgba(255, 255, 255, 0.72);
+  background-color: rgba(255, 255, 255, 0.86);
   color: #0f172a;
-  border-color: rgba(99, 102, 241, 0.22);
+  border-color: rgba(79, 70, 229, 0.28);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
 }
 
+/* =========================================================
+   Accesibilidad
+   Indicador de foco para navegación por teclado. Si cambias la
+   paleta, cuida que este outline siga siendo visible.
+   ========================================================= */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid rgba(129, 140, 248, 0.72);
+  outline-offset: 4px;
+}
+
+html.light a:focus-visible,
+html.light button:focus-visible {
+  outline-color: rgba(79, 70, 229, 0.72);
+}
+
+/* =========================================================
+   Animaciones utilitarias
+   Usadas por elementos con borde animado.
+   ========================================================= */
 @keyframes rotate {
   from {
     transform: rotate(0deg);
@@ -137,6 +392,17 @@ html.light .theme-toggle {
   animation: rotate 1s linear infinite;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
+}
+
+/* =========================================================
+   Comportamiento global de la interfaz
+   Smooth scroll para navegación por anchors y elementos que no
+   deberían seleccionarse como texto durante la interacción.
+   ========================================================= */
 html {
   scroll-behavior: smooth;
 }
@@ -146,21 +412,24 @@ html {
   user-select: none;
 }
 
-/* Custom Scrollbar para el Slider de Tecnologías */
+/* =========================================================
+   Scrollbar del slider de tecnologías
+   Solo afecta elementos con la clase .tech-scroll.
+   ========================================================= */
 .tech-scroll::-webkit-scrollbar {
   width: 6px;
 }
 
 .tech-scroll::-webkit-scrollbar-track {
-  background: rgba(30, 41, 59, 0.5); /* Color slate oscuro */
+  background: rgba(30, 41, 59, 0.5);
   border-radius: 10px;
 }
 
 .tech-scroll::-webkit-scrollbar-thumb {
-  background: #6366f1; /* Color indigo-500 de Tailwind */
+  background: #6366f1;
   border-radius: 10px;
 }
 
 .tech-scroll::-webkit-scrollbar-thumb:hover {
-  background: #4f46e5; /* Color indigo-600 */
+  background: #4f46e5;
 }
