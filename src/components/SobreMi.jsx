@@ -102,8 +102,7 @@ export const SobreMi = () => {
                 <strong className="text-indigo-400 font-semibold">
                   Técnico Superior Analista Programador
                 </strong>{" "}
-                titulado y en marzo de 2026 daré el siguiente paso en mi
-                formación iniciando la Ingeniería en Desarrollo de Software.
+                titulado y próximamente titulado de Ingeniero en Desarrollo de Software (Carrera en curso).
               </p>
               <p>
                 Me destaco por mi adaptabilidad técnica: durante mi experiencia
@@ -112,7 +111,7 @@ export const SobreMi = () => {
                 <strong className="text-white font-semibold">
                   PHP puro y MySQL
                 </strong>
-                , construyendo una arquitectura basada en los principios del MVC
+                , construyendo una arquitectura basada en los principios del Modelo Vista Controlador (MVC) y aplicando metodologías agiles
                 desde cero.
               </p>
               <p>

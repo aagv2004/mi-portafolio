@@ -138,7 +138,7 @@ function App() {
 
             <p className="max-w-xl text-base md:text-lg text-slate-400 mb-8 leading-relaxed">
               Analista Programador enfocado en desarrollo full-stack, creación
-              de APIs, interfaces modernas y sistemas web funcionales.
+              de APIs, interfaces modernas y sistemas web.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
