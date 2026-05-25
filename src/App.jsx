@@ -1,7 +1,6 @@
-/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
-import { ArrowRight, MessageCircle } from "lucide-react";
-import { useState } from "react";
+import { ArrowRight, Moon, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
 import Reveal from "./components/Reveal.jsx";
 import { SobreMi } from "./components/SobreMi.jsx";
 import { Proyectos } from "./components/Proyectos.jsx";
@@ -10,33 +9,68 @@ import { Contacto } from "./components/Contacto.jsx";
 import { Footer } from "./components/Footer.jsx";
 
 function App() {
-  const [copiado, setCopiado] = useState(false);
+  const [tema, setTema] = useState(() => {
+    if (typeof window === "undefined") return "dark";
+    return localStorage.getItem("tema") || "dark";
+  });
 
-  const manejarCopiado = () => {
-    navigator.clipboard.writeText("agvergarasoftware@gmail.com");
-    setCopiado(true);
-    setTimeout(() => setCopiado(false), 3000);
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle("light", tema === "light");
+    root.classList.toggle("dark", tema === "dark");
+    localStorage.setItem("tema", tema);
+  }, [tema]);
+
+  const alternarTema = () => {
+    setTema((temaActual) => (temaActual === "dark" ? "light" : "dark"));
   };
 
   return (
-    <div className="min-h-screen font-sans selection:bg-indigo-500/3 text-slate-200">
+    <div className="min-h-screen font-sans selection:bg-indigo-500/30 text-slate-200">
       <header className="fixed top-0 left-0 w-full z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
         <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
           <a href="#" className="flex items-center gap-3">
             <img src="/vite.svg" alt="Logo" className="w-8 h-8" />
-            <span className="font-bold text-white tracking-wide">Alejandro G. Vergara</span>
+            <span className="font-bold text-white tracking-wide">
+              Alejandro G. Vergara
+            </span>
           </a>
 
-          <div className="hidden md:flex items-center gap-8 text-sm text-slate-300">
-            <a href="#sobre-mi" className="hover:text-indigo-400 transition">Sobre mí</a>
-            <a href="#especialidades" className="hover:text-indigo-400 transition">Especialidades</a>
-            <a href="#proyectos" className="hover:text-indigo-400 transition">Proyectos</a>
-            <a href="#contacto" className="hover:text-indigo-400 transition">Contacto</a>
+          <div className="flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-8 text-sm text-slate-300">
+              <a href="#sobre-mi" className="hover:text-indigo-400 transition">
+                Sobre mí
+              </a>
+              <a
+                href="#especialidades"
+                className="hover:text-indigo-400 transition"
+              >
+                Especialidades
+              </a>
+              <a href="#proyectos" className="hover:text-indigo-400 transition">
+                Proyectos
+              </a>
+              <a href="#contacto" className="hover:text-indigo-400 transition">
+                Contacto
+              </a>
+            </div>
+
+            <button
+              type="button"
+              onClick={alternarTema}
+              className="theme-toggle inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-200 backdrop-blur-sm transition hover:border-indigo-400/50 hover:text-white"
+              aria-label={
+                tema === "dark" ? "Activar modo claro" : "Activar modo oscuro"
+              }
+              title={tema === "dark" ? "Modo claro" : "Modo oscuro"}
+            >
+              {tema === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
           </div>
         </nav>
       </header>
+
       <Reveal>
-        
         {/* Hero section */}
         <section className="relative min-h-screen px-6 pt-32 pb-24 lg:px-8 max-w-7xl mx-auto grid lg:grid-cols-2 gap-14 items-center interface-object">
           <motion.div
@@ -57,20 +91,20 @@ function App() {
             </h1>
 
             <p className="max-w-xl text-base md:text-lg text-slate-400 mb-8 leading-relaxed">
-              Analista Programador enfocado en desarrollo full-stack, creación de APIs,
-              interfaces modernas y sistemas web funcionales.
+              Analista Programador enfocado en desarrollo full-stack, creación
+              de APIs, interfaces modernas y sistemas web funcionales.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
               <a href="#proyectos">
-                <button className="px-7 py-3.5 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-500 transition-all flex items-center gap-2 group shadow-[0_0_20px_rgba(79,70,229,0.35)]">
+                <button className="primary-action px-7 py-3.5 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-500 transition-all flex items-center gap-2 group shadow-[0_0_20px_rgba(79,70,229,0.35)]">
                   Ver proyectos
                   <ArrowRight className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </a>
 
               <a href="#contacto">
-                <button className="px-7 py-3.5 bg-white/5 text-white border border-white/20 backdrop-blur-sm rounded-xl font-bold hover:bg-white/10 hover:border-white/40 transition-all">
+                <button className="secondary-action px-7 py-3.5 bg-white/5 text-white border border-white/20 backdrop-blur-sm rounded-xl font-bold hover:bg-white/10 hover:border-white/40 transition-all">
                   Contactar
                 </button>
               </a>
@@ -85,7 +119,7 @@ function App() {
           >
             <div className="absolute w-72 h-72 bg-indigo-600/30 rounded-full blur-3xl" />
 
-            <div className="relative w-full max-w-md rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 shadow-2xl">
+            <div className="hero-code-card relative w-full max-w-md rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 shadow-2xl">
               <div className="flex gap-2 mb-5">
                 <span className="w-3 h-3 rounded-full bg-red-400" />
                 <span className="w-3 h-3 rounded-full bg-yellow-400" />
@@ -93,12 +127,12 @@ function App() {
               </div>
 
               <pre className="text-sm text-slate-300 leading-relaxed">
-        {`const developer = {
-          name: "Alejandro González",
-          role: "Full-Stack Developer",
-          stack: ["React", "Node", "Java", "SQL"],
-          focus: "Crear soluciones útiles"
-        };`}
+                {`const developer = {
+  name: "Alejandro González",
+  role: "Full-Stack Developer",
+  stack: ["React", "Node", "Java", "SQL"],
+  focus: "Crear soluciones útiles"
+};`}
               </pre>
             </div>
           </motion.div>

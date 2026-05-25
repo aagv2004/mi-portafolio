@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaNodeJs, FaDocker, FaGithub, FaReact } from "react-icons/fa";
+import { FaNodeJs, FaDocker, FaGithub, FaReact, FaJava } from "react-icons/fa";
 import {
   SiPhp,
   SiPython,
@@ -17,6 +17,11 @@ import {
   SiCss3,
   SiElectron,
   SiFlutter,
+  SiDjango,
+  SiSpringboot,
+  SiNextdotjs,
+  SiExpress,
+  SiTypescript,
 } from "react-icons/si";
 import { Firebase } from "@boxicons/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -26,11 +31,14 @@ const tecnologias = [
   { nombre: "JavaScript", Icono: SiJavascript, color: "text-[#F7DF1E]" },
   { nombre: "React.js", Icono: FaReact, color: "text-[#61DAFB]" },
   { nombre: "Node.js", Icono: FaNodeJs, color: "text-[#339933]" },
-  { nombre: "Express.js", Icono: FaNodeJs, color: "text-[#339933]" },
-  { nombre: "Next.js", Icono: FaReact, color: "text-[#000000]" },
-  { nombre: "TypeScript", Icono: SiJavascript, color: "text-[#3178C6]" },
+  { nombre: "Express.js", Icono: SiExpress, color: "text-slate-100" },
+  { nombre: "Next.js", Icono: SiNextdotjs, color: "text-slate-100" },
+  { nombre: "TypeScript", Icono: SiTypescript, color: "text-[#3178C6]" },
   { nombre: "PHP", Icono: SiPhp, color: "text-[#777BB4]" },
   { nombre: "Python", Icono: SiPython, color: "text-[#3776AB]" },
+  { nombre: "Java", Icono: FaJava, color: "text-[#F89820]" },
+  { nombre: "Spring Boot", Icono: SiSpringboot, color: "text-[#6DB33F]" },
+  { nombre: "Django", Icono: SiDjango, color: "text-[#0C4B33]" },
   { nombre: "MySQL", Icono: SiMysql, color: "text-[#4479A1]" },
   { nombre: "MongoDB", Icono: SiMongodb, color: "text-[#47A248]" },
   { nombre: "Docker", Icono: FaDocker, color: "text-[#2496ED]" },

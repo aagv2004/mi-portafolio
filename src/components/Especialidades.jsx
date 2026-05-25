@@ -1,23 +1,14 @@
 import { motion } from "framer-motion";
 import { Server, Layout, Database } from "lucide-react";
-import { FaNodeJs, FaGithub, FaReact, FaJava } from "react-icons/fa";
+import { FaReact, FaJava } from "react-icons/fa";
 import {
-  SiPhp,
-  SiPython,
   SiMongodb,
   SiMysql,
   SiJavascript,
-  SiTailwindcss,
-  SiHtml5,
-  SiDjango,
-  SiPostgresql,
   SiOracle,
-  SiGit,
-  SiCss3,
-  SiBootstrap,
+  SiTailwindcss,
   SiSpringboot,
 } from "react-icons/si";
-import { Firebase } from "@boxicons/react";
 
 const areas = [
   {
@@ -28,14 +19,10 @@ const areas = [
     colorBorder: "border-indigo-500/30",
     alineacion: "md:ml-0 md:mr-auto",
     descripcion:
-      "Construyo la lógica del servidor con lenguajes y frameworks backend. Diseño APIs RESTful escalables, implemento arquitecturas MVC seguras y gestiono reglas de negocio para que cada sistema sea mantenible.",
+      "Mi base más fuerte está en Java y Spring Boot para construir servicios backend, APIs REST y lógica de negocio con una estructura clara y mantenible.",
     tecnologias: [
-      { nombre: "Node.js", Icono: FaNodeJs, color: "text-[#339933]" },
-      { nombre: "PHP", Icono: SiPhp, color: "text-[#777BB4]" },
-      { nombre: "Python", Icono: SiPython, color: "text-[#3776AB]" },
       { nombre: "Java", Icono: FaJava, color: "text-[#F89820]" },
       { nombre: "Spring Boot", Icono: SiSpringboot, color: "text-[#6DB33F]" },
-      { nombre: "Django", Icono: SiDjango, color: "text-[#0C4B33]" },
     ],
   },
   {
@@ -46,14 +33,11 @@ const areas = [
     colorBorder: "border-violet-500/30",
     alineacion: "md:mx-auto",
     descripcion:
-      "Transformo datos en experiencias. Trabajo con lenguajes de la web, librerías y sistemas de estilos para crear SPA claras, rápidas y conectadas a servicios externos.",
+      "Para frontend suelo trabajar con JavaScript, React y Tailwind CSS, creando interfaces web conectadas al backend y enfocadas en una experiencia clara para el usuario.",
     tecnologias: [
       { nombre: "JavaScript", Icono: SiJavascript, color: "text-[#F7DF1E]" },
       { nombre: "React.js", Icono: FaReact, color: "text-[#61DAFB]" },
-      { nombre: "Tailwind", Icono: SiTailwindcss, color: "text-[#06B6D4]" },
-      { nombre: "HTML5", Icono: SiHtml5, color: "text-[#E34C26]" },
-      { nombre: "CSS3", Icono: SiCss3, color: "text-[#1572B6]" },
-      { nombre: "Bootstrap", Icono: SiBootstrap, color: "text-[#7952B3]" },
+      { nombre: "Tailwind CSS", Icono: SiTailwindcss, color: "text-[#06B6D4]" },
     ],
   },
   {
@@ -64,15 +48,11 @@ const areas = [
     colorBorder: "border-emerald-500/30",
     alineacion: "md:mr-0 md:ml-auto",
     descripcion:
-      "Ordeno los cimientos del sistema: modelado de datos relacionales y no relacionales, servicios cloud, control de versiones y una exploración constante de entornos Linux.",
+      "Trabajo con bases de datos relacionales y no relacionales. Manejo la base sintáctica de SQL, modelo consultas y adapto la solución según el motor que requiera el proyecto.",
     tecnologias: [
+      { nombre: "Oracle Database", Icono: SiOracle, color: "text-[#F80102]" },
       { nombre: "MySQL", Icono: SiMysql, color: "text-[#4479A1]" },
       { nombre: "MongoDB", Icono: SiMongodb, color: "text-[#47A248]" },
-      { nombre: "GitHub", Icono: FaGithub, color: "text-white" },
-      { nombre: "PostgreSQL", Icono: SiPostgresql, color: "text-[#4479A1]" },
-      { nombre: "Oracle Database", Icono: SiOracle, color: "text-[#F80102]" },
-      { nombre: "Git", Icono: SiGit, color: "text-[#F1502F]" },
-      { nombre: "Firebase", Icono: Firebase, color: "text-[#FFCA28]" },
     ],
   },
 ];
@@ -86,8 +66,8 @@ export const Especialidades = () => {
             El ecosistema en mis manos
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto">
-            Dominio del ciclo de desarrollo desde lenguajes y frameworks hasta
-            datos, servicios y herramientas de trabajo.
+            Un stack más acotado, centrado en las tecnologías que uso con mayor
+            frecuencia para backend, frontend y datos.
           </p>
         </div>
 

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, ExternalLink, Activity, Database, Leaf } from "lucide-react";
+import { Github, ExternalLink, Activity, Smartphone, Leaf } from "lucide-react";
 
 const proyectos = [
   {
@@ -26,23 +26,24 @@ const proyectos = [
   },
   {
     id: 2,
-    titulo: "Phoenix ERP",
-    estado: "En desarrollo",
-    estadoColor: "text-amber-400 bg-amber-400/10 border-amber-400/20",
-    icono: <Database className="text-amber-400" size={24} />,
+    titulo: "TeamPay",
+    estado: "Flutter App",
+    estadoColor: "text-cyan-400 bg-cyan-400/10 border-cyan-400/20",
+    icono: <Smartphone className="text-cyan-400" size={24} />,
     descripcion:
-      "Sistema de planificación de recursos empresariales enfocado en gestión centralizada de inventarios. Diseño de base de datos relacional robusta y operaciones CRUD complejas para sincronización multi-sucursal.",
+      "Aplicación móvil desarrollada en Flutter para gestionar gastos grupales, registrar pagos compartidos y calcular saldos pendientes entre integrantes. Incluye autenticación, grupos, participantes, gastos compartidos, saldos automáticos y soporte de tema claro/oscuro.",
     tecnologias: [
-      "Node.js",
-      "Express",
-      "MySQL",
-      "Docker",
-      "React",
-      "Tailwind CSS",
+      "Flutter",
+      "Dart",
+      "Firebase",
+      "Firebase Auth",
+      "Cloud Firestore",
+      "Provider",
+      "Material Design",
     ],
-    github: "https://github.com/aagv2004/Phoenix-ERP",
+    github: "https://github.com/aagv2004/teampay-app",
     demo: null,
-    imagen: "/phoenix-erp.png",
+    imagen: "/TeamPay.png",
   },
   {
     id: 3,

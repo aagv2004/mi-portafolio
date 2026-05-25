@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
+import { Check, Copy, Mail, MessageCircle, Send } from "lucide-react";
+
+const correo = "andresg.vergara04@gmail.com";
 
 export const Contacto = () => {
   const [copiado, setCopiado] = useState(false);
 
-  const manejarCopiado = () => {
-    navigator.clipboard.writeText("andresg.vergara04@gmail.com");
+  const manejarCopiado = async () => {
+    await navigator.clipboard.writeText(correo);
     setCopiado(true);
     setTimeout(() => setCopiado(false), 3000);
   };
@@ -20,88 +22,88 @@ export const Contacto = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="max-w-5xl mx-auto bg-slate-950/50 backdrop-blur-2xl rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(79,70,229,0.2)]"
+        className="contact-card max-w-6xl mx-auto relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/60 backdrop-blur-2xl shadow-[0_0_50px_rgba(79,70,229,0.18)]"
       >
-        {/* Decoración de fondo */}
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-indigo-600/20 blur-[100px] rounded-full pointer-events-none" />
-        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-violet-600/10 blur-[100px] rounded-full pointer-events-none" />
+        <div className="absolute -top-24 right-0 w-96 h-96 bg-indigo-600/20 blur-[110px] rounded-full pointer-events-none" />
+        <div className="absolute -bottom-32 -left-24 w-96 h-96 bg-violet-600/10 blur-[110px] rounded-full pointer-events-none" />
 
-        <div className="relative z-10">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">
-            Listo para aportar <br />{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">
-              en tu equipo de desarrollo
+        <div className="relative z-10 grid gap-10 lg:grid-cols-[1.2fr_0.8fr] p-8 md:p-12 lg:p-16">
+          <div className="text-left">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 text-sm font-semibold tracking-wider text-indigo-400 border border-indigo-500/30 uppercase bg-indigo-500/10 rounded-full">
+              <Send size={14} />
+              Contacto directo
             </span>
-          </h2>
-          <p className="text-slate-400 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-            Ya sea para discutir una oportunidad laboral, colaborar en una
-            arquitectura desafiante o hablar sobre código, mi bandeja de entrada
-            está abierta.
-          </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            {/* Botón de Copiar Correo Reparado */}
-            <button
-              onClick={manejarCopiado}
-              className="relative p-[2px] overflow-hidden rounded-2xl group transition-all active:scale-95"
-            >
-              {/* Aquí estaba el error: 90deg y #4338ca */}
-              <div
-                className={`absolute inset-[-1000%] ${copiado ? "animate-[spin_1s_linear_infinite]" : "animate-[spin_4s_linear_infinite]"} bg-[conic-gradient(from_90deg_at_50%_50%,#4338ca_0%,#818cf8_50%,#4338ca_100%)] ${copiado ? "opacity-100" : "opacity-40 group-hover:opacity-100"} transition-opacity`}
-              />
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight leading-tight">
+              ¿Construimos algo{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">
+                útil y bien pensado?
+              </span>
+            </h2>
 
-              <div
-                className={`relative px-8 py-4 ${copiado ? "bg-indigo-600" : "bg-slate-900"} rounded-[14px] transition-colors duration-500 flex items-center justify-center min-w-[200px]`}
+            <p className="text-slate-400 text-lg mb-10 max-w-2xl leading-relaxed">
+              Estoy abierto a oportunidades laborales, colaboraciones y
+              conversaciones técnicas sobre desarrollo web, APIs, bases de datos
+              o productos que necesiten una ejecución clara.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button
+                type="button"
+                onClick={manejarCopiado}
+                className="primary-action relative px-7 py-4 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-500 transition-all flex items-center justify-center gap-2 group shadow-[0_0_20px_rgba(79,70,229,0.35)] active:scale-95"
               >
-                <motion.div
-                  initial={{ x: "-100%" }}
-                  animate={{ x: copiado ? "0%" : "-100%" }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="absolute inset-0 bg-white/10"
-                />
-                <span className="relative z-10 font-bold text-white flex items-center gap-2">
-                  {copiado ? (
-                    <>
-                      <motion.svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="w-5 h-5 text-emerald-300"
-                        initial={{ pathLength: 0, opacity: 0 }}
-                        animate={{ pathLength: 1, opacity: 1 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                      >
-                        <polyline points="20 6 9 17 4 12" />
-                      </motion.svg>
-                      <motion.span
-                        initial={{ opacity: 0, x: 5 }}
-                        animate={{ opacity: 1, x: 0 }}
-                      >
-                        ¡Email Copiado!
-                      </motion.span>
-                    </>
-                  ) : (
-                    "Copiar mi correo"
-                  )}
-                </span>
-              </div>
-            </button>
+                {copiado ? (
+                  <>
+                    <Check size={20} className="text-emerald-200" />
+                    Email copiado
+                  </>
+                ) : (
+                  <>
+                    <Copy size={20} className="group-hover:scale-110 transition" />
+                    Copiar correo
+                  </>
+                )}
+              </button>
 
-            <a
-              href="https://wa.me/56961917708?text=Hola%20Alejandro%21%20He%20visto%20tu%20portafolio%20y%20me%20gustaría%20conversar%20contigo%20sobre%20una%20oportunidad.%20Mi%20nombre%20es%3A"
-              target="_blank"
-              rel="noreferrer"
-              className="px-8 py-4 bg-white/5 text-white border border-white/10 rounded-2xl font-bold hover:bg-white/10 transition-all backdrop-blur-md flex items-center justify-center gap-2 group"
-            >
-              <MessageCircle
-                size={20}
-                className="text-emerald-400 group-hover:scale-110 transition-transform"
-              />
-              Contactar por <span className="text-emerald-400">WhatsApp</span>
-            </a>
+              <a
+                href="https://wa.me/56961917708?text=Hola%20Alejandro%21%20He%20visto%20tu%20portafolio%20y%20me%20gustar%C3%ADa%20conversar%20contigo%20sobre%20una%20oportunidad.%20Mi%20nombre%20es%3A"
+                target="_blank"
+                rel="noreferrer"
+                className="secondary-action px-7 py-4 bg-white/5 text-white border border-white/20 backdrop-blur-sm rounded-xl font-bold hover:bg-white/10 hover:border-white/40 transition-all flex items-center justify-center gap-2 group"
+              >
+                <MessageCircle
+                  size={20}
+                  className="text-emerald-400 group-hover:scale-110 transition-transform"
+                />
+                WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <div className="contact-info-panel rounded-2xl border border-white/10 bg-white/[0.04] p-6 md:p-8 flex flex-col justify-between gap-8">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center mb-6">
+                <Mail className="text-indigo-300" size={22} />
+              </div>
+              <p className="text-sm uppercase tracking-widest text-slate-500 mb-3 font-bold">
+                Correo principal
+              </p>
+              <p className="text-lg font-semibold text-white break-all">
+                {correo}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 text-sm">
+              <div className="rounded-xl border border-white/10 bg-slate-900/50 p-4">
+                <p className="text-slate-500 mb-1">Disponibilidad</p>
+                <p className="font-semibold text-white">Abierto a conversar</p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-slate-900/50 p-4">
+                <p className="text-slate-500 mb-1">Respuesta</p>
+                <p className="font-semibold text-white">Lo antes posible</p>
+              </div>
+            </div>
           </div>
         </div>
       </motion.div>
